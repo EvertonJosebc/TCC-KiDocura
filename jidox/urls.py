@@ -25,15 +25,15 @@ urlpatterns = [
     path("", view=index_view, name="index"),
 
     # App
-    path("apps/", include("apps.urls")),
+    path("apps/", include("myapps.apps.urls")),
 
     # Custom
-    path("custom/", include("custom.urls")),
+    path("custom/", include("myapps.custom.urls")),
     # Layouts
-    path("layouts/", include("layouts.urls")),
+    path("layouts/", include("myapps.layouts.urls")),
 
     # Components
-    path("components/", include("components.urls")),
+    path("components/", include("myapps.components.urls")),
 
     path("accounts/", include("allauth.urls")),
 ]

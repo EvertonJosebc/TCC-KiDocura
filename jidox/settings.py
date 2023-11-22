@@ -49,11 +49,11 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
 ]
 LOCAL_APPS = [
-    "users.apps.UsersConfig",
-    "apps.apps.AppsConfig",
-    "custom.apps.CustomConfig",
-    "components.apps.ComponentsConfig",
-    "layouts.apps.LayoutsConfig",
+    "myapps.users",
+    "myapps.apps",
+    "myapps.custom",
+    "myapps.components",
+    "myapps.layouts",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -167,9 +167,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "myapps.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "myapps.users.adapters.SocialAccountAdapter"
 
 SITE_ID = 1
 
