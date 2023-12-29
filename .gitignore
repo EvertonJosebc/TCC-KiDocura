@@ -1,0 +1,6 @@
+venv/
+db.sqlite3
+apps/partners/__pycache__/
+apps/production/__pycache__/
+apps/users/__pycache__/
+TCC_Kidocura/__pycache__

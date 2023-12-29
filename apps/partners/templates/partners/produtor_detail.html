@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Detalhes do Produtor{% endblock %}
+{% block content %}
+
+    <div class="container-fluid list-user">
+        <h1><strong>Produtor: </strong>{{produtor.nome}}</h1>
+
+        <p><strong>Email: </strong>{{ produtor.email }}</p>
+        <p><strong>Telefone: </strong> {{ produtor.telefone }}</p>
+        <p><strong>CNPJ: </strong> {{ produtor.CPF }}</p>
+
+        <h3><strong>Endereço</strong></h3>
+            
+        <p><strong>Rua: </strong> {{ produtor.rua }}</p>
+        <p><strong>Bairro: </strong> {{ produtor.bairro}}</p>
+        <p><strong>Cidade:</strong> {{ produtor.cidade}}</p>
+        <p><strong>CEP: </strong> {{ produtor.CEP}}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,420 @@
+body, html{
+    font-family: Arial, sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: black !important;
+  }
+  
+/*#############################################################
+#######################  Menu Vertical  #######################
+############################################################# */
+
+  .menu-vertical {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    overflow-y: auto;
+    width: 15%;
+    min-width: 100px !important;
+    height: 100%;
+    background: linear-gradient(to right, #A19506, #FFC806);
+    color: #ffffff !important;
+  }
+  
+  #logo {
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .menu ul li {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .menu ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .menu ul li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.3s;
+  }
+  
+  .menu ul li a:hover {
+    background-color: #9ea42a;
+    border-radius: 5px;
+  }
+  
+  .menu {
+    overflow-y: auto;
+  }
+  
+@media (min-width: 992px) {
+  .sidebar {
+      width: 250px;
+  }
+}
+
+/*#############################################################
+########################    Navbar    #########################
+############################################################# */
+
+#navbar{
+  padding: 15px 0;
+  top: 0;
+  height: 100px;
+  background: linear-gradient(to left, #A19506, #FFC806);
+  margin-left: 15% !important;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#navbar ul{
+  width: 100%;
+  align-items: center;
+}
+
+#navbar ul form{
+  width: 60%;
+  display: inline-flex;
+  margin: 0px 5%;
+  height: 40px;
+}
+
+#navbar ul form button{
+  background-color: #9ea42a;
+  color: #ffffff;
+
+}
+
+#navbar ul li{
+  margin: 0px 5%;
+}
+#navbar ul li a {
+  text-decoration: none !important;
+}
+#navbar ul li .dropdown-menu #logout strong{
+  text-decoration: none !important;
+  color: #A19506;
+  margin: 10%;
+}
+
+#navbar ul li a img{
+  width: 40px;
+}
+/*#############################################################
+########################  Tela login  #########################
+############################################################# */
+
+.screen{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.screen form{
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  text-align: center;
+  width: 50%;
+}
+
+.screen form .login_field input{
+  width: 90%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  border-bottom:dotted rgb(76, 76, 76) 1px;
+}
+
+.screen form .form-group{
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.screen form button{
+  width: 90%;
+  padding: 5px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  background: radial-gradient(#A19506, #FFC806)
+}
+
+/*#############################################################
+#####################  Tela de Registro  ######################
+############################################################# */
+
+.form-register{
+  margin-left: 15% !important;
+  width: 85% !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#form-register{
+  width: 100%;
+  margin: 5px auto !important;
+  padding: 30px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  align-items: center;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#form-register h1{
+  text-align: center;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+#form-register button{
+  display: flex;
+  justify-content: center;
+  text-align: center !important;
+  width: 90%;
+  margin: auto;
+  border-radius: 10px;
+  background: radial-gradient(#A19506, #FFC806);
+  color: #ffffff;
+  padding: 5px;
+  border: solid #9ea42a 1px;
+  margin-top: 25px;
+}
+
+#form-register .form-group div input{
+  border: none;
+  border-bottom: dotted rgb(76, 76, 76) 1px;
+  margin-bottom: 15px;
+  border-radius: 0%;
+  /* width: 400px !important; */
+  min-width: 300px;
+  flex-grow: 1 !important;
+  flex-basis: 300px !important;
+  
+}
+
+#form-register .form-group div #id_tipoUsuario{
+  border: none;
+  border-bottom: dotted rgb(76, 76, 76) 1px;
+  margin-bottom: 20px;
+  border-radius: 0%;
+  width: 300px;
+  flex-grow: 1 !important;
+  flex-basis: 300px !important;
+}
+#form-register .form-group #div_id_password1{
+  border: none;
+  border-bottom: dotted rgb(76, 76, 76) 1px;
+  margin-bottom: 20px;
+  border-radius: 0%;
+  width: 300px !important;
+  flex-grow: 1 !important;
+  flex-basis: 300px !important;
+}
+#form-register .form-group div small{
+  flex-direction: row;
+  width: 300px !important;
+  flex-grow: 1 !important;
+  flex-basis: 300px !important;
+  display: none;
+}
+
+
+/*#############################################################
+#####################  Listar Usuários  #######################
+############################################################# */
+
+.list-user{
+  margin-left: 20% !important;
+  margin-top: 20px !important;
+  width: 75% !important;
+  margin: auto;
+  padding: 50px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.list-user h1{
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.list-user table{
+  width: 90% !important;
+  justify-content: center;
+}
+
+.list-user table tr{
+  border-bottom: 1px dotted rgb(76, 76, 76) !important;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-user table tr td{
+  padding:10px 5px !important;
+}
+.list-user table tr th{
+  padding:10px 5px !important;
+}
+
+.list-user table tr td span a{
+  height: 30px;
+  width: 30px;
+  background-color: #9ea42a;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  margin: 5px 0px 5px 10px;
+  border-radius: 25%;
+  text-decoration: none;
+  padding: 5px;
+}
+
+/*#############################################################
+########################  Dashboard  ##########################
+############################################################# */
+
+.dashboard{
+  margin-left: 15% !important;
+  width: 85% !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around !important;
+}
+
+.dashboard .container {
+  background-color: rgba(250, 250, 250, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 25px !important;  
+  filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125)) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content:center !important;
+  text-align: center !important;
+  flex-grow: 2 !important;
+  flex-basis: 300px !important;
+  max-width: 400px !important;
+  margin: 20px 25px 0 25px !important;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
+  box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
+}
+
+.dashboard .container .wrapper {
+  width: 90% !important;
+  height: 100% !important; 
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dashboard .container .wrapper img{
+  width: 30%;
+}
+
+.dashboard .container .wrapper h1{
+  font-family: 'Righteous', sans-serif !important;
+  color: rgba(0, 0, 0, 0.98) !important;
+  text-transform: uppercase !important;
+  font-size: 2.4rem !important;
+}
+
+.dashboard .container .button-wrapper {
+  margin-top: 18px !important;
+}
+
+.dashboard .container .button-wrapper .btn {
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 24px !important;
+  font-size: 12px !important;
+  font-size: 0.8rem !important;  
+  letter-spacing: 2px !important;  
+  cursor: pointer !important;
+  margin: 10px;
+}
+
+.dashboard .container .button-wrapper .btn + .btn {
+  margin-left: 10px !important;
+}
+
+.dashboard .container .button-wrapper .outline {
+  background: radial-gradient(#A19506, #FFC806);
+  color: rgba(255,255,255,0.95) !important;
+  filter: drop-shadow(0) !important;
+  font-weight: bold !important;
+  transition: all .3s ease !important; 
+  
+}
+
+.dashboard .container .button-wrapper .outline:hover{
+  transform: scale(1.125) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  transition: all .3s ease !important;  
+}
+
+.dashboard .container .button-wrapper .fill {
+  background: #ffffff;
+  color: #A19506 !important;
+  filter: drop-shadow(0) !important;
+  font-weight: bold !important;
+  transition: all .3s ease !important; 
+  border: #A19506 solid 2px;
+}
+
+.dashboard .container .button-wrapper .fill:hover{
+  transform: scale(1.125) !important;  
+  border-color: #FFC806 !important;
+  filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125)) !important;
+  transition: all .3s ease !important;    
+}
+
+.page-item.active .page-link {
+  background-color: #A19506 !important;
+  border: #9ea42a 1px solid !important;
+}
+
+.page-item.disabled .page-link {
+  color: #9ea42a !important;
+}
+/*#############################################################
+#########################  Details  ###########################
+############################################################# */
+
+#detalhe{
+  display: table;
+  justify-content: space-around;
+  width: 100% !important;
+}
+.list-user #detalhe h1{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  text-align: left;
+}
+
+#detalhe-cliente{
+  float: left;
+  width: 50%;
+  margin: auto;
+}

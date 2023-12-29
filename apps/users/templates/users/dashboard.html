@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+    <div class="container-fluid dashboard">
+        <div class="container">
+            <div class="wrapper">
+                <h3> Users </h3>
+                <img id="" src="{% static 'img/clientes.png'%}" alt="clientes">
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
+                <a href="{% url 'users:users' %}"><button class="btn fill">Listar</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="banner-image"></div>
+                <h3> Clientes</h3>
+                <img id="" src="{% static 'img/companhia.png'%}" alt="clientes">
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'partners:cliente_register' %}"><button class="btn outline">Registrar</button></a>
+                <a href="{% url 'partners:list_cliente' %}"><button class="btn fill">Listar</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="banner-image"></div>
+                <h3> Produtores</h3>
+                <img id="" src="{% static 'img/fruta.png'%}" alt="fruta">  
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
+                <a href="{% url 'partners:list_produtor' %}"><button class="btn fill">Listar</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="banner-image"></div>
+                <h3> Frutas</h3>
+                <img id="" src="{% static 'img/fruta.png'%}" alt="fruta">  
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
+                <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

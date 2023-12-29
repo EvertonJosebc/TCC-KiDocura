@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} Detalhes do Usuário{% endblock %}
+{% block content %}
+
+    <div class="container-fluid list-user">
+        <div id="detalhe">
+            <h1><strong>User: </strong>{{user.username}}</h1>
+            <div id="detalhe-cliente">
+                <p><strong>Email: </strong>{{ user.email }}</p>
+                <p><strong>Telefone: </strong> {{ user.telefone }}</p>
+                <p><strong>CPF: </strong> {{ user.CPF }}</p>
+                <p><strong>RG: </strong> {{ user.RG }}</p>
+                <p><strong>tipoUsuario: </strong> {{ user.tipoUsuario }}</p>
+            </div>
+            <div id="detalhe-cliente">
+                <h3><strong>Endereço</strong></h3>
+                    
+                <p><strong>Rua: </strong> {{ user.rua }}</p>
+                <p><strong>Bairro: </strong> {{ user.bairro}}</p>
+                <p><strong>Cidade:</strong> {{ user.cidade}}</p>
+                <p><strong>CEP: </strong> {{ user.CEP}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
