@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 # Create your views here.
 
+from apps.production.models import Compra
 from .models import Produtor, Cliente
 from .form import ProdutorForm, ClienteForm
 
@@ -62,6 +63,9 @@ class ProdutorUpdate(UpdateView):
     
 class ProdutorDetail(DetailView):
     model = Produtor
-    def client_detail_view(request, pk):
-        produtor = get_object_or_404(produtor, pk=pk)
-        return render(request, 'partners/produtor_detail.html', context={'produtor': produtor})
+    context_object_name = 'produtor'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productions'] = Compra.objects.filter(produtor = self.kwargs.get("pk"))
+        return context

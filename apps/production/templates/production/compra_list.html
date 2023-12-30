@@ -1,45 +1,29 @@
-{% extends 'layouts/base.html' %}
+{% extends "layouts/base.html" %}
 {% load static %}
-{% block title %} Detalhes do Produtor{% endblock %}
+{% block title %} Frutas {% endblock %}
 {% block content %}
-
     <div class="container-fluid list-user">
-        <div id="detalhe">
-            <h1><strong>Produtor: </strong>{{produtor.nome}}</h1>
-            <div id="detalhe-cliente">
-                <p><strong>Email: </strong>{{ produtor.email }}</p>
-                <p><strong>Telefone: </strong> {{ produtor.telefone }}</p>
-                <p><strong>CNPJ: </strong> {{ produtor.CPF }}</p>
-            </div>
-            <div id="detalhe-cliente">
-                <h3><strong>Endereço</strong></h3>
-                
-                <p><strong>Rua: </strong> {{ produtor.rua }}</p>
-                <p><strong>Bairro: </strong> {{ produtor.bairro}}</p>
-                <p><strong>Cidade:</strong> {{ produtor.cidade}}</p>
-                <p><strong>CEP: </strong> {{ produtor.CEP}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid list-user">
-        <h1>Entregas do Produtor</h1>
+        <h1>Lista de Frutas</h1>
         <table>
             <tr>
                 <th>Quantidade</th>
                 <th>Fruta</th>
-                <th>Data de Recebimento</th>
+                <th>Produtor</th>
             </tr>
-            {%for procucao in productions%}
+            {%for compra in object_list%}
                 <tr>
                     <td>
-                        <span>{{procucao.quantidade}}</span>
+                        <span>{{compra.quantidade}}</span>
                     </td>
                     <td>
-                        <span>{{procucao.fruta}}</span>
+                        <span>{{compra.fruta}}</span>
                     </td>
                     <td>
-                        <span>{{procucao.create_ad}}</span>
+                        <span>{{compra.produtor}}</span>
                     </td>
+                    {% comment %} <td>
+                        <span><a href="{% url 'production:update_compra' compra.pk %}"><i class="fas fa-edit"></i></a></span>   
+                    </td> {% endcomment %}
                 </tr>
             {%endfor%}
         </table>
@@ -73,5 +57,4 @@
             </div>
         {% endif %}
     </div>
-    
 {% endblock %}

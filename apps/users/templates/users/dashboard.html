@@ -28,7 +28,7 @@
             <div class="wrapper">
                 <div class="banner-image"></div>
                 <h3> Produtores</h3>
-                <img id="" src="{% static 'img/fruta.png'%}" alt="fruta">  
+                <img id="" src="{% static 'img/agricultor.png'%}" alt="fruta">  
             </div>
             <div class="button-wrapper"> 
                 <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
@@ -39,11 +39,22 @@
             <div class="wrapper">
                 <div class="banner-image"></div>
                 <h3> Frutas</h3>
-                <img id="" src="{% static 'img/fruta.png'%}" alt="fruta">  
+                <img id="" src="{% static 'img/frutas.png'%}" alt="fruta">  
             </div>
             <div class="button-wrapper"> 
                 <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
                 <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="banner-image"></div>
+                <h3> Compra de Frutas</h3>
+                <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">  
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'production:compra_register' %}"><button class="btn outline">Registrar</button></a>
+                <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
             </div>
         </div>
     </div>
