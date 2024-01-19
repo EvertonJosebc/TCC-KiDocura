@@ -12,4 +12,5 @@ urlpatterns = [
     
     path('compra_register/', CompraView.as_view(), name="compra_register"),
     path('list_compra/', CompraList.as_view(), name="list_compra"),
+    path('list_estoque/', EstoqueView.as_view(), name="list_compra"),
 ]

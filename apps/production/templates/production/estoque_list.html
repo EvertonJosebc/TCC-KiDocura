@@ -10,17 +10,17 @@
                 <th>Fruta</th>
                 <th>Produtor</th>
             </tr>
-            {%for compra in object_list%}
+            {%for estoque in object_list%}
                 <tr>
                     <td>
-                        <span>{{compra.quantidade}}</span>
+                        <span>{{estoque.quantidade_atual}}</span>
                     </td>
                     <td>
-                        <span>{{compra.fruta}}</span>
+                        <span>{{estoque.quantidade_max}}</span>
                     </td>
-                    <td>
-                        <span>{{compra.produtor}}</span>
-                    </td>
+                    {% comment %} <td>
+                        <span>{{estoque.produtor}}</span>
+                    </td> {% endcomment %}
                 </tr>
             {%endfor%}
         </table>

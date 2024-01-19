@@ -208,6 +208,16 @@ body, html{
   
 }
 
+#form-register .form-group div select{
+  border: none;
+  border-bottom: dotted rgb(76, 76, 76) 1px;
+  margin-bottom: 15px;
+  border-radius: 0%;
+  min-width: 300px;
+  flex-grow: 1 !important;
+  flex-basis: 300px !important;
+}
+
 #form-register .form-group div #id_tipoUsuario{
   border: none;
   border-bottom: dotted rgb(76, 76, 76) 1px;
