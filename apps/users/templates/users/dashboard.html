@@ -57,5 +57,15 @@
                 <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
             </div>
         </div>
+        <div class="container">
+            <div class="wrapper">
+                <div class="banner-image"></div>
+                <h3> Estoque</h3>
+                <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">  
+            </div>
+            <div class="button-wrapper"> 
+                <a href="{% url 'production:list_estoque' %}"><button class="btn outline"><i class="fa-solid fa-arrow-right-to-bracket"></i></button></a>
+            </div>
+        </div>
     </div>
 {% endblock %}

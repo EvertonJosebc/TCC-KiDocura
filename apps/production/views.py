@@ -34,28 +34,31 @@ class FrutaUpdate(UpdateView):
     template_name = 'production/fruta_update.html'
     success_url = reverse_lazy("dashboard")
     
-class CompraView(CreateView):
-    model = Compra
+class CompraView(View):
     form_class = CompraForm
+    initial = {'key': 'value'}
     template_name = 'production/compra_register.html'
-    success_url = reverse_lazy("production:compra_register")
+
+    def get(self, request):
+
+        form = self.form_class(initial = self.initial)
+        return render(request, self.template_name, {'form': self.form_class})
     
-    def form_valid(self, form):
-            form.instance.user = self.request.user
+    def post(self, request, *args, **kwargs):
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
             form.save()
-            return super(CompraView,self).form_valid(form)
+            messages.success(request, f'compra criada com sucesso')
+            return redirect(to='/')
+        return render(request, self.template_name, {'form': form})
    
-    # def form_invalid(self, form):
-    #     messages.error(self.request, "Inválido Login e Senha.")
-    #     return self.render_to_response(self.get_context_data(form=form))
-    
 class CompraList(ListView):
     model = Compra
     queryset = Compra.objects.all()
     template_name = 'production/compra_list.html'
     paginate_by = 5
     
-
 class EstoqueView(ListView):
     model = EstoqueFruta
     queryset = EstoqueFruta.objects.all()

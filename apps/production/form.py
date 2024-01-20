@@ -34,23 +34,25 @@ class CompraForm(ModelForm):
             "espaco_estoque",
         ]
         
-        def clean_espaco_estoque(self):
-            espaco_estoque = self.cleaned_data['espaco_estoque']
-            estoque = EstoqueFruta.objects.all()
-            print(estoque)
-            if len(estoque) == 0:
-                if espaco_estoque < 50:
-                    estoque = EstoqueFruta.objects.create(quantidade_atual = espaco_estoque)
-                    estoque.save()
-                    
-                else:
-                    raise ValidationError('O estoque não suporta a quantidade inserida!')
-            
-            else:
-                if espaco_estoque + estoque[0].quantidade_atual >estoque[0].quantidade_max:
-                    raise ValidationError('O estoque não suporta a quantidade inserida!')
+    def clean_espaco_estoque(self):
+        espaco_estoque = self.cleaned_data['espaco_estoque']
+        estoque = EstoqueFruta.objects.all()
+        print(estoque)
+        if len(estoque) == 0:
+            if espaco_estoque <= 50:
+                estoque = EstoqueFruta.objects.create(quantidade_atual = espaco_estoque)
+                estoque.save()
                 
-            return espaco_estoque
+            else:
+                raise ValidationError('O estoque não suporta a quantidade inserida!')
+        
+        else:
+            if espaco_estoque + estoque[0].quantidade_atual >estoque[0].quantidade_max:
+                raise ValidationError('O estoque não suporta a quantidade inserida!')
+            
+            estoque[0].quantidade_atual += espaco_estoque
+            estoque[0].save()
+        return espaco_estoque
                     
             
             

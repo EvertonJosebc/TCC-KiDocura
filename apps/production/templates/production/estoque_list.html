@@ -6,9 +6,8 @@
         <h1>Lista de Compras</h1>
         <table>
             <tr>
-                <th>Quantidade</th>
-                <th>Fruta</th>
-                <th>Produtor</th>
+                <th>Quantidade Atual</th>
+                <th>Quantidade Máxima</th>
             </tr>
             {%for estoque in object_list%}
                 <tr>
@@ -18,9 +17,6 @@
                     <td>
                         <span>{{estoque.quantidade_max}}</span>
                     </td>
-                    {% comment %} <td>
-                        <span>{{estoque.produtor}}</span>
-                    </td> {% endcomment %}
                 </tr>
             {%endfor%}
         </table>
