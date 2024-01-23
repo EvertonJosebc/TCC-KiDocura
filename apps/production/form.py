@@ -1,6 +1,6 @@
 from django.forms import forms
 from django.forms import ModelForm
-from .models import Fruta, Compra, EstoqueFruta
+from .models import Fruta, Compra, EstoqueFruta, Producao
 from django.core.exceptions import ValidationError
 
 class FrutaForm(ModelForm):
@@ -55,4 +55,32 @@ class CompraForm(ModelForm):
         return espaco_estoque
                     
             
+class ProducaoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProducaoForm, self).__init__(*args, **kwargs)
             
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            
+    class Meta:
+        model = Producao
+        fields = [
+            "quantidade_produzida",
+            "fruta",
+            "quantidade_reduzida",
+        ]
+        
+    def clean_quantidade_reduzida(self):
+        quantidade_reduzida = self.cleaned_data['quantidade_reduzida']
+        estoque = EstoqueFruta.objects.all()
+        if len(estoque) > 0:
+            if estoque[0].quantidade_atual - quantidade_reduzida <= 0:
+                raise ValidationError('O estoque não tem essa quantidade de produtos disponíveis!')
+            
+            estoque[0].quantidade_atual -= quantidade_reduzida
+            estoque[0].save()
+            
+        else:
+            raise ValidationError('O estoque não tem essa quantidade de produtos disponíveis!')
+        
+        return quantidade_reduzida     

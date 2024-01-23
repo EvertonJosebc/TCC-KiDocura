@@ -27,3 +27,10 @@ class Compra(models.Model):
     create_ad = models.DateTimeField(auto_now_add = True)
     espaco_estoque = models.IntegerField()
     estoque = models.ForeignKey(EstoqueFruta, on_delete=models.CASCADE, null=True, blank=True)
+    
+class Producao(models.Model):
+    quantidade_produzida = models.FloatField()
+    fruta = models.ForeignKey(Fruta, on_delete=models.CASCADE, null=True, blank=True)
+    data_producao = models.DateTimeField(auto_now_add = True)
+    quantidade_reduzida = models.IntegerField()
+    estoque = models.ForeignKey(EstoqueFruta, on_delete=models.CASCADE, null=True, blank=True)

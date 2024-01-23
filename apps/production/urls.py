@@ -12,5 +12,11 @@ urlpatterns = [
     
     path('compra_register/', CompraView.as_view(), name="compra_register"),
     path('list_compra/', CompraList.as_view(), name="list_compra"),
+    
     path('list_estoque/', EstoqueView.as_view(), name="list_estoque"),
+    
+    ################################  Produção  #################################
+    
+    path('producao_register/', ProducaoView.as_view(), name="producao_register"),
+    path('list_producao/', ProducaoList.as_view(), name="list_producao"),
 ]

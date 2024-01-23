@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
-from .models import Fruta, Compra, EstoqueFruta
-from .form import FrutaForm, CompraForm
+from .models import Fruta, Compra, EstoqueFruta, Producao
+from .form import FrutaForm, CompraForm, ProducaoForm
 
 # Create your views here.
 
@@ -63,3 +63,28 @@ class EstoqueView(ListView):
     model = EstoqueFruta
     queryset = EstoqueFruta.objects.all()
     template_name = 'production/estoque_list.html'
+    
+class ProducaoView(View):
+    form_class = ProducaoForm
+    initial = {'key': 'value'}
+    template_name = 'production/producao_register.html'
+
+    def get(self, request):
+
+        form = self.form_class(initial = self.initial)
+        return render(request, self.template_name, {'form': self.form_class})
+    
+    def post(self, request, *args, **kwargs):
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'compra criada com sucesso')
+            return redirect(to='/')
+        return render(request, self.template_name, {'form': form})
+    
+class ProducaoList(ListView):
+    model = Producao
+    queryset = Producao.objects.all()
+    template_name = 'production/producao_list.html'
+    paginate_by = 5

@@ -3,19 +3,23 @@
 {% block title %} Compras {% endblock %}
 {% block content %}
     <div class="container-fluid list-user">
-        <h1>Estoque de Frutas</h1>
+        <h1>Lista de Compras</h1>
         <table>
             <tr>
-                <th>Quantidade Atual</th>
-                <th>Quantidade Máxima</th>
+                <th>Quantidade</th>
+                <th>Fruta</th>
+                <th>Data de Produção</th>
             </tr>
-            {%for estoque in object_list%}
+            {%for producao in object_list%}
                 <tr>
                     <td>
-                        <span>{{estoque.quantidade_atual}}</span>
+                        <span>{{producao.quantidade_produzida}}</span>
                     </td>
                     <td>
-                        <span>{{estoque.quantidade_max}}</span>
+                        <span>{{producao.fruta}}</span>
+                    </td>
+                    <td>
+                        <span>{{producao.data_producao}}</span>
                     </td>
                 </tr>
             {%endfor%}
