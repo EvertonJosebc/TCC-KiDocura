@@ -19,4 +19,7 @@ urlpatterns = [
     
     path('producao_register/', ProducaoView.as_view(), name="producao_register"),
     path('list_producao/', ProducaoList.as_view(), name="list_producao"),
+    
+    path('list_estoque_polpa/', EstoquePolpaView.as_view(), name="list_estoque_polpa"),
 ]
+

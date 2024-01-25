@@ -1,6 +1,6 @@
 from django.forms import forms
 from django.forms import ModelForm
-from .models import Fruta, Compra, EstoqueFruta, Producao
+from .models import Fruta, Compra, EstoqueFruta, Producao, EstoquePolpa
 from django.core.exceptions import ValidationError
 
 class FrutaForm(ModelForm):
@@ -84,3 +84,23 @@ class ProducaoForm(ModelForm):
             raise ValidationError('O estoque não tem essa quantidade de produtos disponíveis!')
         
         return quantidade_reduzida     
+    
+    def clean_quantidade_produzida(self):
+        quantidade_produzida = self.cleaned_data['quantidade_produzida']
+        estoquep = EstoquePolpa.objects.all()
+        print(estoquep)
+        if len(estoquep) == 0:
+            if quantidade_produzida <= 1000:
+                estoquep = EstoquePolpa.objects.create(quantidade_atual = quantidade_produzida)
+                estoquep.save()
+                
+            else:
+                raise ValidationError('O estoquep não suporta a quantidade inserida!')
+        
+        else:
+            if quantidade_produzida + estoquep[0].quantidade_atual >estoquep[0].quantidade_max:
+                raise ValidationError('O estoquep não suporta a quantidade inserida!')
+            
+            estoquep[0].quantidade_atual += quantidade_produzida
+            estoquep[0].save()
+        return quantidade_produzida

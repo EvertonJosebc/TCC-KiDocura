@@ -19,7 +19,10 @@ class Fruta(models.Model):
 class EstoqueFruta(models.Model):
     quantidade_atual = models.IntegerField()
     quantidade_max = models.IntegerField(default = 50)
-    
+
+class EstoquePolpa(models.Model):
+    quantidade_atual = models.IntegerField()
+    quantidade_max = models.FloatField(default = 1000)
 class Compra(models.Model):
     quantidade = models.FloatField()
     fruta = models.ForeignKey(Fruta, on_delete=models.CASCADE, null=True, blank=True)

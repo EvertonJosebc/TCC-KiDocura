@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
-from .models import Fruta, Compra, EstoqueFruta, Producao
+from .models import Fruta, Compra, EstoqueFruta, Producao, EstoquePolpa
 from .form import FrutaForm, CompraForm, ProducaoForm
 
 # Create your views here.
@@ -79,7 +79,7 @@ class ProducaoView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'compra criada com sucesso')
+            messages.success(request, f'produção registrada')
             return redirect(to='/')
         return render(request, self.template_name, {'form': form})
     
@@ -88,3 +88,8 @@ class ProducaoList(ListView):
     queryset = Producao.objects.all()
     template_name = 'production/producao_list.html'
     paginate_by = 5
+    
+class EstoquePolpaView(ListView):
+    model = EstoquePolpa
+    queryset = EstoquePolpa.objects.all()
+    template_name = 'production/estoque_polpa_list.html'
