@@ -1,5 +1,5 @@
 from django.db import models
-from apps.partners.models import Produtor
+from apps.partners.models import Produtor, Cliente
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -37,3 +37,10 @@ class Producao(models.Model):
     data_producao = models.DateTimeField(auto_now_add = True)
     quantidade_reduzida = models.IntegerField()
     estoque = models.ForeignKey(EstoqueFruta, on_delete=models.CASCADE, null=True, blank=True)
+    
+class Entrega(models.Model):
+    quantidade_entregue = models.FloatField()
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
+    data_producao = models.DateTimeField(auto_now_add = True)
+    estoque = models.ForeignKey(EstoquePolpa, on_delete = models.CASCADE, null=True, blank = True)
+    status = models.BooleanField(default = False)

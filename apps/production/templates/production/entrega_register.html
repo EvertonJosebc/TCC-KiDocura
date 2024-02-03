@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Registro de Entrega {% endblock %}
+{% block content %}
+    <div class="container-fluid  form-register">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="content">
+                    <div class="form-login">                        
+                        <form method="POST" enctype="multipart/form-data" class="form-control" id="form-register">
+                            <h1 >Cadastrar Entrega</h1>
+                            {% csrf_token %}
+                            {{form | crispy }}
+                            <br>
+                            <button class="button-form" type="submit">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+{% endblock %}

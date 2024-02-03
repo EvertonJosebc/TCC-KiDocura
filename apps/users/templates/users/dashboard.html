@@ -3,80 +3,91 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
     <div class="container-fluid dashboard">
-        <div class="container">
-            <div class="wrapper">
+        <div class="container" >
+            <div class="wrapper" style="background-image: url('{% static 'img/clientes.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <h3> Users </h3>
-                <img id="" src="{% static 'img/clientes.png'%}" alt="clientes">
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'users:users' %}"><button class="btn fill">Listar</button></a>
+                {% comment %} <img id="" src="{% static 'img/clientes.png'%}" alt="clientes"> {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'users:users' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <div class="wrapper">
+        <div class="container" >
+            <div class="wrapper" style="background-image: url('{% static 'img/companhia.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Clientes</h3>
-                <img id="" src="{% static 'img/companhia.png'%}" alt="clientes">
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'partners:cliente_register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'partners:list_cliente' %}"><button class="btn fill">Listar</button></a>
+                {% comment %} <img id="" src="{% static 'img/companhia.png'%}" alt="clientes"> {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'partners:cliente_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'partners:list_cliente' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper" style="background-image: url('{% static 'img/agricultor.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Produtores</h3>
-                <img id="" src="{% static 'img/agricultor.png'%}" alt="fruta">  
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'partners:list_produtor' %}"><button class="btn fill">Listar</button></a>
+                {% comment %} <img id="" src="{% static 'img/agricultor.png'%}" alt="fruta">   {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'partners:list_produtor' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper" style="background-image: url('{% static 'img/frutas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Frutas</h3>
-                <img id="" src="{% static 'img/frutas.png'%}" alt="fruta">  
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+                {% comment %} <img id="" src="{% static 'img/frutas.png'%}" alt="fruta">   {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper" style="background-image: url('{% static 'img/balancas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Compra de Frutas</h3>
-                <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">  
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'production:compra_register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
+                {% comment %} <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">   {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'production:compra_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper" style="background-image: url('{% static 'img/estoque_f.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Estoque</h3>
-                <img id="" src="{% static 'img/estoque_f.png'%}" alt="fruta"> 
-            </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a>
-                <a href="{% url 'production:list_estoque_polpa' %}"><button class="btn fill">Polpas</button></a>
+                {% comment %} <img id="" src="{% static 'img/estoque_f.png'%}" alt="fruta">  {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a>
+                    <a href="{% url 'production:list_estoque_polpa' %}"><button class="btn fill">Polpas</button></a>
+                </div>
             </div>
         </div>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper" style="background-image: url('{% static 'img/lavar.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                 <div class="banner-image"></div>
                 <h3> Produção de Polpa</h3>
-                <img id="" src="{% static 'img/lavar.png'%}" alt="fruta">  
+                {% comment %} <img id="" src="{% static 'img/lavar.png'%}" alt="fruta">   {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'production:producao_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'production:list_producao' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
-            <div class="button-wrapper"> 
-                <a href="{% url 'production:producao_register' %}"><button class="btn outline">Registrar</button></a>
-                <a href="{% url 'production:list_producao' %}"><button class="btn fill">Listar</button></a>
+        </div>
+        <div class="container">
+            <div class="wrapper" style="background-image: url('{% static 'img/entrega.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                <div class="banner-image"></div>
+                <h3> Entregas</h3>
+                {% comment %} <img id="" src="{% static 'img/entrega.png'%}" alt="fruta">   {% endcomment %}
+                <div class="button-wrapper"> 
+                    <a href="{% url 'production:entrega_register' %}"><button class="btn outline">Registrar</button></a>
+                    <a href="{% url 'production:list_entrega' %}"><button class="btn fill">Listar</button></a>
+                </div>
             </div>
         </div>
     </div>

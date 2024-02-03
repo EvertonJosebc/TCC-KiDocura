@@ -314,7 +314,7 @@ body, html{
 .dashboard .container {
   background-color: rgba(250, 250, 250, 0.2) !important;
   border-radius: 12px !important;
-  padding: 25px !important;  
+  padding: 15px !important;  
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125)) !important;
   display: flex !important;
   flex-direction: column !important;
@@ -331,29 +331,24 @@ body, html{
 }
 
 .dashboard .container .wrapper {
-  width: 90% !important;
+  width: 90% auto !important;
   height: 100% !important; 
-  display: inline-flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: rgba(161, 149, 6, 0.5) !important;
+  border-radius: 20px !important;
 }
 
-.dashboard .container .wrapper img{
-  width: 30%;
+.dashboard .container .wrapper h3{
+  color: #ffffff !important;
+  display: flex !important;
+  padding: 5px !important;
+  align-items: center !important;
 }
 
-.dashboard .container .wrapper h1{
-  font-family: 'Righteous', sans-serif !important;
-  color: rgba(0, 0, 0, 0.98) !important;
-  text-transform: uppercase !important;
-  font-size: 2.4rem !important;
-}
-
-.dashboard .container .button-wrapper {
-  margin-top: 18px !important;
-}
-
-.dashboard .container .button-wrapper .btn {
+.dashboard .container .wrapper .button-wrapper .btn {
   border: none !important;
   padding: 12px 24px !important;
   border-radius: 24px !important;
@@ -364,11 +359,11 @@ body, html{
   margin: 10px;
 }
 
-.dashboard .container .button-wrapper .btn + .btn {
+.dashboard .container .wrapper .button-wrapper .btn + .btn {
   margin-left: 10px !important;
 }
 
-.dashboard .container .button-wrapper .outline {
+.dashboard .container .wrapper .button-wrapper .outline {
   background: radial-gradient(#A19506, #FFC806);
   color: rgba(255,255,255,0.95) !important;
   filter: drop-shadow(0) !important;
@@ -377,14 +372,14 @@ body, html{
   
 }
 
-.dashboard .container .button-wrapper .outline:hover{
+.dashboard .container .wrapper .button-wrapper .outline:hover{
   transform: scale(1.125) !important;
   color: rgba(255, 255, 255, 0.9) !important;
   border-color: rgba(255, 255, 255, 0.9) !important;
   transition: all .3s ease !important;  
 }
 
-.dashboard .container .button-wrapper .fill {
+.dashboard .container .wrapper .button-wrapper .fill {
   background: #ffffff;
   color: #A19506 !important;
   filter: drop-shadow(0) !important;
@@ -393,7 +388,7 @@ body, html{
   border: #A19506 solid 2px;
 }
 
-.dashboard .container .button-wrapper .fill:hover{
+.dashboard .container .wrapper .button-wrapper .fill:hover{
   transform: scale(1.125) !important;  
   border-color: #FFC806 !important;
   filter: drop-shadow(0 10px 5px rgba(0,0,0,0.125)) !important;

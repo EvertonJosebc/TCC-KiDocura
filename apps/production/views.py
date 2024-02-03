@@ -5,9 +5,11 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.http import JsonResponse
+from django.db.models import F, Case, Value, When, BooleanField
 
-from .models import Fruta, Compra, EstoqueFruta, Producao, EstoquePolpa
-from .form import FrutaForm, CompraForm, ProducaoForm
+from .models import Fruta, Compra, EstoqueFruta, Producao, EstoquePolpa, Entrega
+from .form import FrutaForm, CompraForm, ProducaoForm, EntregaForm
 
 # Create your views here.
 
@@ -93,3 +95,61 @@ class EstoquePolpaView(ListView):
     model = EstoquePolpa
     queryset = EstoquePolpa.objects.all()
     template_name = 'production/estoque_polpa_list.html'
+    
+class EntregaView(View):
+    form_class = EntregaForm
+    initial = {'key': 'value'}
+    template_name = 'production/entrega_register.html'
+
+    def get(self, request):
+
+        form = self.form_class(initial = self.initial)
+        return render(request, self.template_name, {'form': self.form_class})
+    
+    def post(self, request, *args, **kwargs):
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Entrega Registrada')
+            return redirect(to='/')
+        return render(request, self.template_name, {'form': form})
+    
+class EntregaList(ListView):
+    model = Entrega
+    queryset = Entrega.objects.all()
+    template_name = 'production/entrega_list.html'
+    paginate_by = 5
+    
+    def get_queryset(self):
+        queryset = Entrega.objects.annotate(
+            em_rota_first=Case(
+                When(status=False, then=Value(1)),
+                default=Value(0),
+                output_field=BooleanField()
+            )
+        ).order_by('-em_rota_first', '-id')
+
+        return queryset
+    
+class StatusEntrega(UpdateView):
+    model = Entrega
+    template_name = 'production/entrega_list.html'
+    paginate_by = 5
+    queryset = Entrega.objects.order_by('pk')
+    
+    def post(self, request, *args, **kwargs):
+        entrega = self.get_object()
+        entrega.status = True
+        entrega.save()
+
+        return JsonResponse({'message': 'Entrega confirmada com sucesso!'})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)  # Adicione esta linha para imprimir o contexto no console do servidor
+        return context
+
+    success_url = reverse_lazy('dashboard')
+        
+    
