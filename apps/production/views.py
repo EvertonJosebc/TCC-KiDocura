@@ -7,13 +7,15 @@ from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.http import JsonResponse
 from django.db.models import F, Case, Value, When, BooleanField
+from braces.views import GroupRequiredMixin
 
 from .models import Fruta, Compra, EstoqueFruta, Producao, EstoquePolpa, Entrega
 from .form import FrutaForm, CompraForm, ProducaoForm, EntregaForm
 
 # Create your views here.
 
-class FrutaView(CreateView):
+class FrutaView(GroupRequiredMixin, CreateView):
+    group_required = [u'gerente', u'tecdealimentos']
     model = Fruta
     form_class = FrutaForm
     template_name = 'production/fruta_register.html'
@@ -24,19 +26,22 @@ class FrutaView(CreateView):
         messages.success(self.request, "A fruta foi Cadastrada")
         return super(FrutaView,self).form_valid(form)
     
-class FrutaList(ListView):
+class FrutaList(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'tecdealimentos']
     model = Fruta
     queryset = Fruta.objects.all()
     template_name = 'production/fruta_list.html'
     paginate_by = 5
     
-class FrutaUpdate(UpdateView):
+class FrutaUpdate(GroupRequiredMixin, UpdateView):
+    group_required = [u'gerente', u'tecdealimentos']
     model = Fruta
     fields = ['nome', 'preco', 'condicao']
     template_name = 'production/fruta_update.html'
     success_url = reverse_lazy("dashboard")
     
-class CompraView(View):
+class CompraView(GroupRequiredMixin, View):
+    group_required = [u'gerente', u'tecdealimentos']
     form_class = CompraForm
     initial = {'key': 'value'}
     template_name = 'production/compra_register.html'
@@ -55,18 +60,21 @@ class CompraView(View):
             return redirect(to='/')
         return render(request, self.template_name, {'form': form})
    
-class CompraList(ListView):
+class CompraList(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'tecdealimentos']
     model = Compra
     queryset = Compra.objects.all()
     template_name = 'production/compra_list.html'
     paginate_by = 5
     
-class EstoqueView(ListView):
+class EstoqueView(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
     model = EstoqueFruta
     queryset = EstoqueFruta.objects.all()
     template_name = 'production/estoque_list.html'
     
-class ProducaoView(View):
+class ProducaoView(GroupRequiredMixin, View):
+    group_required = [u'gerente', u'gerdeproducao']
     form_class = ProducaoForm
     initial = {'key': 'value'}
     template_name = 'production/producao_register.html'
@@ -85,18 +93,21 @@ class ProducaoView(View):
             return redirect(to='/')
         return render(request, self.template_name, {'form': form})
     
-class ProducaoList(ListView):
+class ProducaoList(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'gerdeproducao']
     model = Producao
     queryset = Producao.objects.all()
     template_name = 'production/producao_list.html'
     paginate_by = 5
     
-class EstoquePolpaView(ListView):
+class EstoquePolpaView(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'gerdeproducao']
     model = EstoquePolpa
     queryset = EstoquePolpa.objects.all()
     template_name = 'production/estoque_polpa_list.html'
     
-class EntregaView(View):
+class EntregaView(GroupRequiredMixin, View):
+    group_required = u'gerente'
     form_class = EntregaForm
     initial = {'key': 'value'}
     template_name = 'production/entrega_register.html'
@@ -115,7 +126,8 @@ class EntregaView(View):
             return redirect(to='/')
         return render(request, self.template_name, {'form': form})
     
-class EntregaList(ListView):
+class EntregaList(GroupRequiredMixin, ListView):
+    group_required = [u'gerente', u'entregador']
     model = Entrega
     queryset = Entrega.objects.all()
     template_name = 'production/entrega_list.html'
@@ -132,7 +144,8 @@ class EntregaList(ListView):
 
         return queryset
     
-class StatusEntrega(UpdateView):
+class StatusEntrega(GroupRequiredMixin, UpdateView):
+    group_required = [u'gerente', u'entregador']
     model = Entrega
     template_name = 'production/entrega_list.html'
     paginate_by = 5
