@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, reverse
@@ -7,6 +8,9 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from rolepermissions.roles import assign_role
+from braces.views import GroupRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from .models import User
@@ -18,7 +22,7 @@ from .form import RegisterForm
 class Home(LoginRequiredMixin,TemplateView):
     template_name = "users/dashboard.html"
     
-class Register(View):
+class Register(LoginRequiredMixin, View):
     form_class = RegisterForm
     initial = {"key": "value"}
     template_name = "users/register.html"
@@ -40,14 +44,14 @@ class Register(View):
             if tipoUsuario == "entregador":
                 assign_role(user,'entregador')
                 
-            if tipoUsuario == "tec. alimentos":
-                assign_role(user,'tec. alimentos')
+            if tipoUsuario == "tec_de_alimentos":
+                assign_role(user,'tecdealimentos')
                 
-            if tipoUsuario == "ger. de producao":
-                assign_role(user,'ger. de producao')
+            if tipoUsuario == "ger_de_producao":
+                assign_role(user,'gerdeproducao')
                 
-            if tipoUsuario == "aux. de producao":
-                assign_role(user,'aux. de producao')
+            if tipoUsuario == "aux_de_producao":
+                assign_role(user,'auxdeproducao')
                 
             username = form.cleaned_data.get("username")
             RG = form.cleaned_data.get("RG")
@@ -71,23 +75,46 @@ class MyLoginView(LoginView):
         messages.error(self.request, "Inválido Login e Senha.")
         return self.render_to_response(self.get_context_data(form=form))
     
-class LogoutView(View):
+class LogoutView(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
         return redirect("login")
     
-class AdminUsers(LoginRequiredMixin,ListView):
+class AdminUsers(LoginRequiredMixin, ListView):
     model = User
     context_object_name = 'user_list'
     paginate_by = 10
 
-class UsersUpdate(UpdateView):
+class UsersUpdate(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ['username', 'email', 'rua', 'bairro', 'cidade', 'CEP', 'telefone', 'tipoUsuario']
+    fields = ['username', 'email', 'rua', 'bairro', 'cidade', 'CEP', 'telefone']
     template_name = 'users/user_update.html'
     success_url = reverse_lazy("dashboard")
     
-class UserDetail(DetailView):
+@login_required
+def updatetipoUsuario(request,id):
+
+    if request.method == 'GET':
+
+        tipoUsuario = request.GET['tipoUsuario']
+        user = User.objects.get(id= id)
+        user.tipoUsuario = tipoUsuario
+        
+        if user.tipoUsuario == 'gerente':
+            assign_role(user,'gerente')
+        if user.tipoUsuario == 'entregador':
+            assign_role(user,'entregador')
+        if user.tipoUsuario == 'tecdealimentos':
+            assign_role(user,'tecdealimentos')
+        if user.tipoUsuario == 'gerdeproducao' :
+            assign_role(user, 'gerdeproducao')
+        if user.tipoUsuario == 'auxdeproducao' :
+            assign_role(user, 'auxdeproducao')
+        user.save()
+        return redirect('/users/users/')
+        
+        
+class UserDetail(LoginRequiredMixin, DetailView):
     model = User
     def client_detail_view(request, pk):
         user = get_object_or_404(User, pk=pk)

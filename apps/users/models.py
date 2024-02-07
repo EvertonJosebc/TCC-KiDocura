@@ -6,9 +6,9 @@ class User(AbstractUser):
     choices = (
         ("gerente", "gerente"),
         ("entregador", "entregador"),
-        ("tec. alimentos", "tec. alimentos"),
-        ("ger. de producao", "ger. de producao"),
-        ("aux. de producao", "aux. de producao"),
+        ("tec_de_alimentos", "tec_de_alimentos"),
+        ("ger_de_producao", "ger_de_producao"),
+        ("aux_de_producao", "aux_de_producao"),
     )
     
     username = models.CharField(max_length=150, unique=True)
