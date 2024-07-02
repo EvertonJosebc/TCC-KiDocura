@@ -4,6 +4,10 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from braces.views import GroupRequiredMixin
+from django.contrib.auth.decorators import login_required
+import matplotlib.pyplot as plt
+from django.http import FileResponse
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -73,8 +77,19 @@ class ProdutorDetail(GroupRequiredMixin, DetailView):
     group_required = [u'gerente', u'tecdealimentos']
     model = Produtor
     context_object_name = 'produtor'
+    template_name = 'partners/produtor_detail.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['productions'] = Compra.objects.filter(produtor = self.kwargs.get("pk"))
+        productions = Compra.objects.filter(produtor = self.kwargs.get("pk"))
+        productions2 = Compra.objects.filter(produtor = self.kwargs.get("pk")).values('fruta').annotate(total_quantidade=Sum('quantidade'))
+        
+        labels = [obj['fruta'] for obj in productions2]
+        values = [obj['total_quantidade'] for obj in productions2]
+           
+        context['productions'] = productions
+        context['labels'] = labels
+        context['values'] = values
+        
         return context
+    

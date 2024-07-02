@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rolepermissions',
     'crispy_forms',
     "crispy_bootstrap4",
+    'chartjs',
     
     'apps.users',
     'apps.partners',
