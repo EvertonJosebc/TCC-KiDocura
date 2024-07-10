@@ -11,7 +11,7 @@ from django.db.models import Sum
 
 # Create your views here.
 
-from apps.production.models import Compra
+from apps.production.models import Compra, Entrega
 from .models import Produtor, Cliente
 from .form import ProdutorForm, ClienteForm
 
@@ -44,9 +44,18 @@ class ClienteUpdate(GroupRequiredMixin, UpdateView):
 class ClienteDetail(GroupRequiredMixin, DetailView):
     group_required = u'gerente'
     model = Cliente
+    context_object_name = 'cliente'
     def client_detail_view(request, pk):
         cliente = get_object_or_404(Cliente, pk=pk)
         return render(request, 'partners/cliente_detail.html', context={'cliente': cliente})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        compras = Entrega.objects.filter(cliente = self.kwargs.get("pk"))
+        
+        context['compras'] = compras
+        
+        return context
     
 class ProdutorView(GroupRequiredMixin, CreateView):
     group_required = [u'gerente', u'tecdealimentos']
@@ -82,9 +91,9 @@ class ProdutorDetail(GroupRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         productions = Compra.objects.filter(produtor = self.kwargs.get("pk"))
-        productions2 = Compra.objects.filter(produtor = self.kwargs.get("pk")).values('fruta').annotate(total_quantidade=Sum('quantidade'))
+        productions2 = Compra.objects.filter(produtor = self.kwargs.get("pk")).values('fruta__nome').annotate(total_quantidade=Sum('quantidade'))
         
-        labels = [obj['fruta'] for obj in productions2]
+        labels = [obj['fruta__nome'] for obj in productions2]
         values = [obj['total_quantidade'] for obj in productions2]
            
         context['productions'] = productions

@@ -66,48 +66,46 @@ body, html{
 #navbar{
   padding: 15px 0;
   top: 0;
-  height: 100px;
   background: linear-gradient(to left, #A19506, #FFC806);
   margin-left: 15% !important;
-  width: 85%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-#navbar ul{
-  width: 100%;
-  align-items: center;
-}
-
-#navbar ul form{
-  width: 60%;
-  display: inline-flex;
-  margin: 0px 5%;
-  height: 40px;
-}
-
-#navbar ul form button{
-  background-color: #9ea42a;
+  width: 85% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
   color: #ffffff;
-
+  text-align: center;
+}
+#navbar #estoque{
+  margin-left: 20px;
+}
+#navbar #estoque_fruta{
+  display: flex;
+  width: 30%;
+  border-radius: 10px;
+  border: #A19506 solid 1px;
+  margin: auto;
+  align-items: center;
+  justify-content:space-around !important;
+  color: #ffffff;
+  -webkit-box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.5);
+  -moz-box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.5);
+  box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.5);
+}
+#navbar #estoque_fruta img{
+  width: 35%;
 }
 
-#navbar ul li{
-  margin: 0px 5%;
-}
-#navbar ul li a {
-  text-decoration: none !important;
-}
-#navbar ul li .dropdown-menu #logout strong{
-  text-decoration: none !important;
-  color: #A19506;
-  margin: 10%;
+#navbar #estoque_fruta .nav-pills{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  
 }
 
-#navbar ul li a img{
-  width: 40px;
+#navbar #estoque_fruta .nav-pills .nav-item{
+  margin: 3px !important;
 }
+
 /*#############################################################
 ########################  Tela login  #########################
 ############################################################# */

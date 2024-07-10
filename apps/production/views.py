@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, TemplateView
 from django.http import JsonResponse
 from django.db.models import F, Case, Value, When, BooleanField
 from braces.views import GroupRequiredMixin
@@ -67,11 +67,23 @@ class CompraList(GroupRequiredMixin, ListView):
     template_name = 'production/compra_list.html'
     paginate_by = 5
     
-class EstoqueView(GroupRequiredMixin, ListView):
-    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
-    model = EstoqueFruta
-    queryset = EstoqueFruta.objects.all()
-    template_name = 'production/estoque_list.html'
+# myapp/context_processors.py
+
+def global_context(request):
+    estoques = EstoqueFruta.objects.all()
+    estoques_porcentagem = []
+    
+    for estoque in estoques:
+        porcentagem = ((estoque.quantidade_atual / estoque.quantidade_max) *  100) if estoque.quantidade_max != 0 else 0
+        estoques_porcentagem.append({
+            'estoque': estoque,
+            'porcentagem': porcentagem
+        })
+    
+    return {
+        'estoques': estoques_porcentagem
+    }
+
     
 class ProducaoView(GroupRequiredMixin, View):
     group_required = [u'gerente', u'gerdeproducao']
@@ -105,6 +117,21 @@ class EstoquePolpaView(GroupRequiredMixin, ListView):
     model = EstoquePolpa
     queryset = EstoquePolpa.objects.all()
     template_name = 'production/estoque_polpa_list.html'
+
+def global_context_polpa_view(request):
+    estoques_polpa = EstoquePolpa.objects.all()
+    estoques_polpa_porcentagem = []
+    
+    for estoque_polpa in estoques_polpa:
+        porcentagem_polpa = ((estoque_polpa.quantidade_atual / estoque_polpa.quantidade_max) *  100) if estoque_polpa.quantidade_max != 0 else 0
+        estoques_polpa_porcentagem.append({
+            'estoque_polpa': estoque_polpa,
+            'porcentagem_polpa': porcentagem_polpa
+        })
+    
+    return {
+        'estoques_polpa': estoques_polpa_porcentagem
+    }
     
 class EntregaView(GroupRequiredMixin, View):
     group_required = u'gerente'

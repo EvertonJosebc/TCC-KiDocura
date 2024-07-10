@@ -67,21 +67,21 @@
                 </div>
             </div>
         {%endif%}
-        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
+        {% comment %} {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
             <div class="container">
                 <div class="wrapper" style="background-image: url('{% static 'img/estoque_f.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                     <div class="banner-image"></div>
                     <h3> Estoque</h3>
                     {% comment %} <img id="" src="{% static 'img/estoque_f.png'%}" alt="fruta">  {% endcomment %}
-                    <div class="button-wrapper"> 
-                        <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a>
-                        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
+                    {% comment %} <div class="button-wrapper">  {% endcomment %}
+                        {% comment %} <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a> {% endcomment %}
+                        {% comment %} {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
                             <a href="{% url 'production:list_estoque_polpa' %}"><button class="btn fill">Polpas</button></a>
                         {%endif%}
                     </div>
                 </div>
             </div>
-        {%endif%}
+        {%endif%} {% endcomment %}
         {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
             <div class="container">
                 <div class="wrapper" style="background-image: url('{% static 'img/lavar.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">

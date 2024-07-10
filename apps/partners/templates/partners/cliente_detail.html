@@ -21,4 +21,58 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid list-user">
+        <div style="width: 45%; text-align: center;">
+            <h2><strong>Quantidade por Fruta</strong></h2>
+            <canvas id="ClienteCompras" style="-webkit-box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.75); -moz-box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.75); box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.75); margin: 10px; border-radius:5px;"></canvas>
+        </div>
+    </div>
+    <div class="container-fluid list-user">
+        <h2><strong>Compras do Cliente</strong></h2>
+        <table>
+            <tr>
+                <th>Quantidade</th>
+                <th>Data da Compra</th>
+            </tr>
+            {%for compra in compras%}
+                <tr>
+                    <td>
+                        <span>{{compra.quantidade_entregue}}</span>
+                    </td>
+                    <td>
+                        <span>{{compra.data_producao}}</span>
+                    </td>
+                </tr>
+            {%endfor%}
+        </table>
+        {% if is_paginated %}
+            <div class="card-footer text-right">
+                <nav class="d-inline-block">
+                    <ul class="pagination mb-0">
+                        {% if page_obj.has_previous %}    
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#"> {{ i }} <span class="sr-only">(current)</span></a></li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

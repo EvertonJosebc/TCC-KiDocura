@@ -19,6 +19,9 @@ class Fruta(models.Model):
 class EstoqueFruta(models.Model):
     quantidade_atual = models.IntegerField()
     quantidade_max = models.IntegerField(default = 50)
+    
+    def __self__(self):
+        return f"Estoque {self.id}"
 
 class EstoquePolpa(models.Model):
     quantidade_atual = models.IntegerField()
