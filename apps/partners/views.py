@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 import matplotlib.pyplot as plt
 from django.http import FileResponse
 from django.db.models import Sum
+from django.utils.dateparse import parse_date
+import json
+from collections import defaultdict
 
 # Create your views here.
 
@@ -90,15 +93,35 @@ class ProdutorDetail(GroupRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        productions = Compra.objects.filter(produtor = self.kwargs.get("pk"))
-        productions2 = Compra.objects.filter(produtor = self.kwargs.get("pk")).values('fruta__nome').annotate(total_quantidade=Sum('quantidade'))
+        produtor_id = self.kwargs.get("pk")
+        productions = Compra.objects.filter(produtor=produtor_id)
+        productions2 = Compra.objects.filter(produtor=produtor_id).values('fruta__nome').annotate(total_quantidade=Sum('quantidade'))
         
         labels = [obj['fruta__nome'] for obj in productions2]
         values = [obj['total_quantidade'] for obj in productions2]
-           
+        
+        line_chart_data = defaultdict(lambda: defaultdict(int))
+        cumulative_data = defaultdict(lambda: defaultdict(int))
+
+        for compra in productions:
+            fruta_nome = compra.fruta.nome
+            date_str = compra.create_ad.date().isoformat()  # Only the date part
+            line_chart_data[fruta_nome][date_str] += compra.quantidade
+
+        for fruta, dates in line_chart_data.items():
+            sorted_dates = sorted(dates.keys())
+            cumulative_sum = 0
+            for date in sorted_dates:
+                cumulative_sum += dates[date]
+                cumulative_data[fruta][date] = cumulative_sum
+
+        # Convert defaultdict to regular dict for JSON serialization
+        cumulative_data = {fruta: dict(dates) for fruta, dates in cumulative_data.items()}
+
         context['productions'] = productions
         context['labels'] = labels
         context['values'] = values
+        context['line_chart_data'] = json.dumps(cumulative_data)  # Ensure it's a JSON string
         
         return context
     

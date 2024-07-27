@@ -19,6 +19,8 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        
 
     </head>
     <body>
@@ -46,7 +48,7 @@
                         <ul class="nav nav-pills">
                             <li class="nav-item">
                                 <p><strong>Capacidade:<br>{{ estoque_fruta.estoque.quantidade_atual }}/{{estoque_fruta.estoque.quantidade_max}}</strong></p>
-                                <h5><strong>Oculpação:<br>{{estoque_fruta.porcentagem|floatformat:2}}%</strong></h5>
+                                <h5><strong>Ocupação:<br>{{estoque_fruta.porcentagem|floatformat:2}}%</strong></h5>
                             </li>
                         </ul>
                     </div>
@@ -57,7 +59,7 @@
                         <ul class="nav nav-pills">
                             <li class="nav-item">
                                 <p><strong>Capacidade:<br>{{ estoque_polpa.estoque_polpa.quantidade_atual }}/{{estoque_polpa.estoque_polpa.quantidade_max|floatformat:0}}</strong></p>
-                                <h5><strong>Oculpação:<br>{{estoque_polpa.porcentagem_polpa|floatformat:2}}%</strong></h5>
+                                <h5><strong>Ocupação:<br>{{estoque_polpa.porcentagem_polpa|floatformat:2}}%</strong></h5>
                             </li>
                         </ul>
                     </div>
@@ -109,8 +111,8 @@
                         datasets: [{
                             data: {{ values|safe }},
                             backgroundColor: [
-                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', 
-                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
+                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40', 
+                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40'
                             ]
                         }]
                     },
@@ -135,6 +137,56 @@
                     }
                 });
             });
+            document.addEventListener("DOMContentLoaded", function() {
+                // Verifique os dados do gráfico na consola
+                console.log("Line Chart Data:", {{ line_chart_data|safe }});
+    
+                const lineChartData = JSON.parse('{{ line_chart_data|escapejs }}');
+                const datasets = [];
+    
+                for (const [fruit, data] of Object.entries(lineChartData)) {
+                    const dates = Object.keys(data);
+                    const quantities = Object.values(data);
+    
+                    datasets.push({
+                        label: fruit,
+                        data: dates.map((date, index) => ({ x: date, y: quantities[index] })),
+                        fill: false,
+                        borderColor: getRandomColor(),
+                        tension: 0.1
+                    });
+                }
+    
+                const ctx = document.getElementById('lineChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: datasets
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    
+            function getRandomColor() {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
         </script>
     </body>
 </html>

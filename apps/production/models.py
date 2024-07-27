@@ -14,7 +14,7 @@ class Fruta(models.Model):
     condicao = models.CharField(max_length= 20, choices=choices, null = True, blank = True)
     
     def __str__(self):
-        return self.nome
+        return f"{self.nome}"
     
 class EstoqueFruta(models.Model):
     quantidade_atual = models.IntegerField()
