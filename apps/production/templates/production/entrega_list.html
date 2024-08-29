@@ -20,7 +20,7 @@
                         <span>{{entrega.cliente}}</span>
                     </td>
                     <td>
-                        <span>{{entrega.data_producao}}</span>
+                        <span>{{entrega.data_producao|date:"d/m/Y H:i"}}</span>
                     </td>
                     <td>
                         {%if entrega.status == False%}

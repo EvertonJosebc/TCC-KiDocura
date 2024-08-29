@@ -171,8 +171,7 @@ class EntregaList(GroupRequiredMixin, ListView):
 
         return queryset
     
-class StatusEntrega(GroupRequiredMixin, UpdateView):
-    group_required = [u'gerente', u'entregador']
+class StatusEntrega(UpdateView):
     model = Entrega
     template_name = 'production/entrega_list.html'
     paginate_by = 5

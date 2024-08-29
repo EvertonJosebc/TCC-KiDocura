@@ -6,7 +6,7 @@
         {%if user.tipoUsuario == 'gerente'%}
             <div class="container" >
                 <div class="wrapper" style="background-image: url('{% static 'img/clientes.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                    <h3> Users </h3>
+                    <h3> Usuários </h3>
                     {% comment %} <img id="" src="{% static 'img/clientes.png'%}" alt="clientes"> {% endcomment %}
                     <div class="button-wrapper"> 
                         <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
