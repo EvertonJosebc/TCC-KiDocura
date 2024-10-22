@@ -178,7 +178,7 @@ class StatusEntrega(UpdateView):
     queryset = Entrega.objects.order_by('pk')
     
     def post(self, request, *args, **kwargs):
-        entrega = self.get_object()
+        entrega = self.get_object()  # Obtém o objeto Entrega com base no pk
         entrega.status = True
         entrega.save()
 

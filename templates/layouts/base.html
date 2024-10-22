@@ -33,7 +33,7 @@
                         <div class="menu flex-grow-1"> 
                             <ul class="list-unstyled">
                                 <img id="logo" src="{% static 'img/logo.PNG'%}" alt="Minha Logo">
-                                <li><a href="{% url 'dashboard' %}"><strong>Home &nbsp&nbsp&nbsp<i class="fa-solid fa-house"></i></strong></a></li>
+                                <li><a href="{% url 'dashboard' %}"><strong>Inicio &nbsp&nbsp&nbsp<i class="fa-solid fa-house"></i></strong></a></li>
                                 <li><a id="logout"  href="{% url 'users:logout' %}"><strong>Sair &nbsp&nbsp&nbsp<i class="fa-solid fa-right-to-bracket"></i></strong></a></li>
                             </ul>
                         </div>
@@ -69,39 +69,48 @@
         {% block content %} {% endblock %}
 
         <script>
-            // Inicialize os componentes do Bootstrap
-            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
-            dropdownElementList.map(function (dropdownToggleEl) {
-                return new bootstrap.Dropdown(dropdownToggleEl)
-            })
-
-            $(document).ready(function(){
-                $("#confirmar-entrega").on("click", function(e){
+            document.addEventListener("DOMContentLoaded", function() {
+                // Inicialize os componentes do Bootstrap
+                var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+                dropdownElementList.map(function (dropdownToggleEl) {
+                    return new bootstrap.Dropdown(dropdownToggleEl);
+                });
+        
+                console.log("Script carregado corretamente!"); // Log para confirmar carregamento do script
+        
+                // Adiciona o evento de clique ao botão de confirmação de entrega
+                $(".confirmar-entrega").on("click", function(e){
                     e.preventDefault();
-                    
-                    var entrega_pk = $(this).data("entrega-pk");
-                    
-                    // Verifique se entrega_pk é válido antes de fazer a solicitação AJAX
+                    console.log("Botão clicado!");
+        
+                    var entrega_pk = $(this).data("entrega-pk"); // Obtém o PK da entrega
+                    console.log("PK da Entrega:", entrega_pk);
+        
                     if (entrega_pk !== undefined) {
+                        var csrfToken = '{{ csrf_token }}';
+                        var url = "{% url 'production:status_entrega' pk=0 %}".replace("0", entrega_pk);
+                        console.log("URL gerada para a solicitação AJAX:", url);
+        
                         $.ajax({
-                            url: "{% url 'production:status_entrega' pk=0 %}".replace("0", entrega_pk),
-                            type: "POST",  // ou "GET" dependendo da sua view
-                            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                            url: url,
+                            type: "POST",
+                            data: {'csrfmiddlewaretoken': csrfToken},
                             success: function(data){
-                                // Atualize a página ou faça outras ações necessárias
-                                location.reload();
+                                alert(data.message); // Mostra a mensagem de sucesso retornada pelo servidor
+                                location.reload();   // Recarrega a página para refletir a atualização
                             },
-                            error: function(error){
-                                console.log(error);
-                                alert("Ocorreu um erro ao confirmar a entrega.");
+                            error: function(xhr, status, error){
+                                console.error("Erro na requisição AJAX:", error);
+                                console.log("Detalhes do erro:", xhr.responseText);
+                                alert("Ocorreu um erro ao confirmar a entrega. Por favor, tente novamente.");
                             }
                         });
                     } else {
                         console.error("Valor de entrega_pk é undefined. Verifique o botão e o atributo data-entrega-pk.");
                     }
                 });
-            });
-            document.addEventListener('DOMContentLoaded', (event) => {
+        
+                // Configuração do gráfico combinado
                 var ctx = document.getElementById('combinedChart').getContext('2d');
                 var total = {{ values|safe }}.reduce((a, b) => a + b, 0);
                 var combinedChart = new Chart(ctx, {
@@ -111,7 +120,7 @@
                         datasets: [{
                             data: {{ values|safe }},
                             backgroundColor: [
-                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40', 
+                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40',
                                 '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40'
                             ]
                         }]
@@ -136,18 +145,17 @@
                         }
                     }
                 });
-            });
-            document.addEventListener("DOMContentLoaded", function() {
-                // Verifique os dados do gráfico na consola
+        
+                // Configuração do gráfico de linha
                 console.log("Line Chart Data:", {{ line_chart_data|safe }});
-    
+        
                 const lineChartData = JSON.parse('{{ line_chart_data|escapejs }}');
                 const datasets = [];
-    
+        
                 for (const [fruit, data] of Object.entries(lineChartData)) {
                     const dates = Object.keys(data);
                     const quantities = Object.values(data);
-    
+        
                     datasets.push({
                         label: fruit,
                         data: dates.map((date, index) => ({ x: date, y: quantities[index] })),
@@ -156,9 +164,9 @@
                         tension: 0.1
                     });
                 }
-    
-                const ctx = document.getElementById('lineChart').getContext('2d');
-                new Chart(ctx, {
+        
+                const ctxLine = document.getElementById('lineChart').getContext('2d');
+                new Chart(ctxLine, {
                     type: 'line',
                     data: {
                         datasets: datasets
@@ -177,16 +185,16 @@
                         }
                     }
                 });
-            });
-    
-            function getRandomColor() {
-                const letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
+        
+                function getRandomColor() {
+                    const letters = '0123456789ABCDEF';
+                    let color = '#';
+                    for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
                 }
-                return color;
-            }
-        </script>
+            });
+        </script> 
     </body>
 </html>
