@@ -44,7 +44,7 @@
                 {% for estoque_fruta in estoques %}
                     <h3 id="estoque"><strong>Estoques</strong></h3>
                     <div id="estoque_fruta">
-                        <img id="" src="{% static 'img/frutas.png'%}" alt="frutas">
+                        <img id="" src="{% static 'img/fruta_caixa.png'%}" alt="frutas">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
                                 <p><strong>Capacidade:<br>{{ estoque_fruta.estoque.quantidade_atual }}/{{estoque_fruta.estoque.quantidade_max}}</strong></p>
@@ -55,7 +55,7 @@
                 {% endfor %}
                 {% for estoque_polpa in estoques_polpa%}
                     <div id="estoque_fruta">
-                        <img id="" src="{% static 'img/polpa.png'%}" alt="frutas">
+                        <img id="" src="{% static 'img/crioterapia.png'%}" alt="frutas">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
                                 <p><strong>Capacidade:<br>{{ estoque_polpa.estoque_polpa.quantidade_atual }}/{{estoque_polpa.estoque_polpa.quantidade_max|floatformat:0}}</strong></p>
