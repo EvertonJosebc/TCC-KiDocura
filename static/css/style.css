@@ -149,7 +149,7 @@ body, html{
   margin-top: 20px;
   border-radius: 10px;
   border: none;
-  background: radial-gradient(#A19506, #FFC806)
+  background-color: #A19506;
 }
 
 /*#############################################################
@@ -184,6 +184,7 @@ body, html{
   border-radius: 10px 10px 0px 0px;
   color: #ffffff;
   margin-bottom: 10px;
+  font-size: 32px;
 }
 
 #form-register button{
@@ -193,7 +194,7 @@ body, html{
   width: 90%;
   margin: auto;
   border-radius: 10px;
-  background: radial-gradient(#A19506, #FFC806);
+  background-color: #A19506;
   color: #ffffff;
   padding: 5px;
   border: solid #9ea42a 1px;
@@ -278,6 +279,7 @@ body, html{
   border-radius: 10px 10px 0px 0px;
   padding: 15px;
   color: #ffffff;
+  font-size: 32px;
 }
 
 .list-user table{

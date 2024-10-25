@@ -7,19 +7,6 @@
             <div class="col-xl-12">
                 <div class="content">
                     <div class="form-login">
-                        {% if form.errors %}
-                            <div class="alert alert-danger alert-dismissible" role="alert">
-                                <div id="form_errors">
-                                    {% for key, value in form.errors.items %}
-                                        <strong>{{ value }}</strong>
-                                    {% endfor %}
-                                </div>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endif %}
-                        
                         <form method="POST" enctype="multipart/form-data" class="form-control" id="form-register">
                             <h1 >Registrar Cliente</h1>
                             {% csrf_token %}

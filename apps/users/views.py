@@ -12,6 +12,7 @@ from braces.views import GroupRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.db import IntegrityError
 
 from .models import User
 from .form import RegisterForm
