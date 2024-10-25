@@ -31,5 +31,5 @@ urlpatterns = [
     
     ################################    Fruta    #################################
     
-    path('list_estoque/', EstoqueView.as_view(), name="list_estoque"),
+    # path('list_estoque/', EstoqueView.as_view(), name="list_estoque"),
 ]

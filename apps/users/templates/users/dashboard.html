@@ -3,92 +3,112 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
     <div class="container-fluid dashboard">
-        <div class="container" >
-            <div class="wrapper" style="background-image: url('{% static 'img/clientes.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <h3> Users </h3>
-                {% comment %} <img id="" src="{% static 'img/clientes.png'%}" alt="clientes"> {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'users:users' %}"><button class="btn fill">Listar</button></a>
+        {%if user.tipoUsuario == 'gerente'%}
+            <div class="container" >
+                <div class="wrapper" style="background-image: url('{% static 'img/clientes.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <h3> Usuários </h3>
+                    {% comment %} <img id="" src="{% static 'img/clientes.png'%}" alt="clientes"> {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'users:register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'users:users' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container" >
-            <div class="wrapper" style="background-image: url('{% static 'img/companhia.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Clientes</h3>
-                {% comment %} <img id="" src="{% static 'img/companhia.png'%}" alt="clientes"> {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'partners:cliente_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'partners:list_cliente' %}"><button class="btn fill">Listar</button></a>
+        {%endif%}
+        {%if user.tipoUsuario == 'gerente'%}
+            <div class="container" >
+                <div class="wrapper" style="background-image: url('{% static 'img/companhia.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Clientes</h3>
+                    {% comment %} <img id="" src="{% static 'img/companhia.png'%}" alt="clientes"> {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'partners:cliente_register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'partners:list_cliente' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/agricultor.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Produtores</h3>
-                {% comment %} <img id="" src="{% static 'img/agricultor.png'%}" alt="fruta">   {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'partners:list_produtor' %}"><button class="btn fill">Listar</button></a>
+        {%endif%}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/agricultor.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Produtores</h3>
+                    {% comment %} <img id="" src="{% static 'img/agricultor.png'%}" alt="fruta">   {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'partners:produtor_register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'partners:list_produtor' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/frutas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Frutas</h3>
-                {% comment %} <img id="" src="{% static 'img/frutas.png'%}" alt="fruta">   {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+        {%endif%}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/frutas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Frutas</h3>
+                    {% comment %} <img id="" src="{% static 'img/frutas.png'%}" alt="fruta">   {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'production:fruta_register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'production:list_fruta' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/balancas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Compra de Frutas</h3>
-                {% comment %} <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">   {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'production:compra_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
+        {%endif%}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/balancas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Compras</h3>
+                    {% comment %} <img id="" src="{% static 'img/balancas.png'%}" alt="fruta">   {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'production:compra_register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'production:list_compra' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/estoque_f.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Estoque</h3>
-                {% comment %} <img id="" src="{% static 'img/estoque_f.png'%}" alt="fruta">  {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a>
-                    <a href="{% url 'production:list_estoque_polpa' %}"><button class="btn fill">Polpas</button></a>
+        {%endif%}
+        {% comment %} {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/estoque_f.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Estoque</h3>
+                    {% comment %} <img id="" src="{% static 'img/estoque_f.png'%}" alt="fruta">  {% endcomment %}
+                    {% comment %} <div class="button-wrapper">  {% endcomment %}
+                        {% comment %} <a href="{% url 'production:list_estoque' %}"><button class="btn outline">Frutas</button></a> {% endcomment %}
+                        {% comment %} {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
+                            <a href="{% url 'production:list_estoque_polpa' %}"><button class="btn fill">Polpas</button></a>
+                        {%endif%}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/lavar.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Produção de Polpa</h3>
-                {% comment %} <img id="" src="{% static 'img/lavar.png'%}" alt="fruta">   {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'production:producao_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'production:list_producao' %}"><button class="btn fill">Listar</button></a>
+        {%endif%} {% endcomment %}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/lavar.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3> Produções</h3>
+                    {% comment %} <img id="" src="{% static 'img/lavar.png'%}" alt="fruta">   {% endcomment %}
+                    <div class="button-wrapper"> 
+                        <a href="{% url 'production:producao_register' %}"><button class="btn outline">Registrar</button></a>
+                        <a href="{% url 'production:list_producao' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="wrapper" style="background-image: url('{% static 'img/entrega.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-                <div class="banner-image"></div>
-                <h3> Entregas</h3>
-                {% comment %} <img id="" src="{% static 'img/entrega.png'%}" alt="fruta">   {% endcomment %}
-                <div class="button-wrapper"> 
-                    <a href="{% url 'production:entrega_register' %}"><button class="btn outline">Registrar</button></a>
-                    <a href="{% url 'production:list_entrega' %}"><button class="btn fill">Listar</button></a>
+        {%endif%}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'entregador' %}
+            <div class="container">
+                <div class="wrapper" style="background-image: url('{% static 'img/entrega.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                    <div class="banner-image"></div>
+                    <h3 style="width:50%;"> Entregas</h3>
+                    {% comment %} <img id="" src="{% static 'img/entrega.png'%}" alt="fruta">   {% endcomment %}
+                    <div class="button-wrapper"> 
+                        {%if user.tipoUsuario == 'gerente' %}
+                            <a href="{% url 'production:entrega_register' %}"><button class="btn outline">Registrar</button></a>
+                        {%endif%}
+                        <a href="{% url 'production:list_entrega' %}"><button class="btn fill">Listar</button></a>
+                    </div>
                 </div>
             </div>
-        </div>
+        {%endif%}
     </div>
 {% endblock %}

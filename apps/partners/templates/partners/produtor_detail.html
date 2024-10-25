@@ -5,8 +5,9 @@
 
     <div class="container-fluid list-user">
         <div id="detalhe">
-            <h1><strong>Produtor: </strong>{{produtor.nome}}</h1>
+            <h2 style="text-align:center; margin-bottom:20px;"><strong>Informações do Produtor</strong></h2>
             <div id="detalhe-cliente">
+                <p><strong>Nome: </strong>{{produtor.nome}}</p>
                 <p><strong>Email: </strong>{{ produtor.email }}</p>
                 <p><strong>Telefone: </strong> {{ produtor.telefone }}</p>
                 <p><strong>CNPJ: </strong> {{ produtor.CPF }}</p>
@@ -21,9 +22,19 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid list-user" style="display: flex; justify-content:space-around;">
+        <div style="width: 45%; text-align: center; border: 1px solid black; padding: 5px;">
+            <h2><strong>Quantidade por Fruta</strong></h2>
+            <canvas id="combinedChart"></canvas>
+        </div>
+        <div style="width: 45%; text-align: center; border: 1px solid black; padding: 5px;">
+            <h2><strong>Linha Fruta</strong></h2>
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
     <div class="container-fluid list-user">
-        <h1>Entregas do Produtor</h1>
-        <table>
+        <h2><strong>Entregas do Produtor</strong></h2>
+        <table class="table">
             <tr>
                 <th>Quantidade</th>
                 <th>Fruta</th>

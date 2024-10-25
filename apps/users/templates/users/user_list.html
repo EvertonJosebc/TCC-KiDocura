@@ -4,11 +4,12 @@
 {% block content %}
     <div class="container-fluid list-user">
         <h1>Lista de Usuários</h1>
-        <table>
+        <table class="table">
             <tr>
                 <th>Nome de Usuário</th>
                 <th>Tipo de Usuário</th>
-                <th>Ações</th>
+                <th>Alterar Cargo</th>
+                <th>Informações</th>
             </tr>
             {%for user in object_list%}
                 <tr>
@@ -17,8 +18,10 @@
                     </td>
                     <td>
                         <span>{{user.tipoUsuario}}</span>
-                        <form action="/users/update_tipo_usuario/{{user.id}}/" method="get">
-                            <select name="tipoUsuario" id="">
+                    </td>
+                    <td>
+                        <form class="formselecao" action="/users/update_tipo_usuario/{{user.id}}/" method="get">
+                            <select name="tipoUsuario" class="form-select" id="">
                               <option value="gerente">Gerente</option>
                               <option value="entregador">Entregador</option>
                               <option value="tecdealimentos">Tec. de Alimentos</option>
@@ -26,7 +29,7 @@
                               <option value="auxdeproducao">Aux. de Produção</option>
                             </select>
                             
-                            <button class="btn btn-success">Enviar</button>
+                            <button class="btn btn-success"><i class="fa-solid fa-check"></i></button>
                         </form>
                     </td>
                     <td>

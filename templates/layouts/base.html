@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +10,18 @@
         <title>{% block title %}{% endblock title %}</title>
 
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/themes/light.css" />
-
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        
         <script src="https://kit.fontawesome.com/07d7922655.js" crossorigin="anonymous"></script>
-
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        
+
     </head>
     <body>
         {% if user.is_authenticated %}
@@ -33,69 +33,168 @@
                         <div class="menu flex-grow-1"> 
                             <ul class="list-unstyled">
                                 <img id="logo" src="{% static 'img/logo.PNG'%}" alt="Minha Logo">
-                                <li><a href="{% url 'dashboard' %}"><strong>Home</strong></a></li>
-                                <li><a id="logout"  href="{% url 'users:logout' %}"><strong>sair</strong></a></li>
+                                <li><a href="{% url 'dashboard' %}"><strong>Inicio &nbsp&nbsp&nbsp<i class="fa-solid fa-house"></i></strong></a></li>
+                                <li><a id="logout"  href="{% url 'users:logout' %}"><strong>Sair &nbsp&nbsp&nbsp<i class="fa-solid fa-right-to-bracket"></i></strong></a></li>
                             </ul>
                         </div>
                     </div>
                 </aside>
             </div>
             <div id="navbar">
-                <ul class="nav nav-pills">
-                    <form class="form-inline">
-                        <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                        <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-fluid" src="{% static 'img/user.png'%}" alt="user">
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Ação</a>
-                            <a class="dropdown-item" href="#">Outra ação</a>
-                            <a class="dropdown-item" href="#">Algo mais aqui</a>
-                            <div class="dropdown-divider"></div>
-                            <a id="logout"  href="{% url 'users:logout' %}"><strong>sair</strong></a>
-                        </div>
-                    </li>
-                </ul>
+                {% for estoque_fruta in estoques %}
+                    <h3 id="estoque"><strong>Estoques</strong></h3>
+                    <div id="estoque_fruta">
+                        <img id="" src="{% static 'img/fruta_caixa.png'%}" alt="frutas">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <p><strong>Capacidade:<br>{{ estoque_fruta.estoque.quantidade_atual }}/{{estoque_fruta.estoque.quantidade_max}}</strong></p>
+                                <h5><strong>Ocupação:<br>{{estoque_fruta.porcentagem|floatformat:2}}%</strong></h5>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                {% for estoque_polpa in estoques_polpa%}
+                    <div id="estoque_fruta">
+                        <img id="" src="{% static 'img/crioterapia.png'%}" alt="frutas">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <p><strong>Capacidade:<br>{{ estoque_polpa.estoque_polpa.quantidade_atual }}/{{estoque_polpa.estoque_polpa.quantidade_max|floatformat:0}}</strong></p>
+                                <h5><strong>Ocupação:<br>{{estoque_polpa.porcentagem_polpa|floatformat:2}}%</strong></h5>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
             </div>
         {% endif %}
         {% block content %} {% endblock %}
 
         <script>
-            // Inicialize os componentes do Bootstrap
-            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
-            dropdownElementList.map(function (dropdownToggleEl) {
-                return new bootstrap.Dropdown(dropdownToggleEl)
-            })
-
-            $(document).ready(function(){
-                $("#confirmar-entrega").on("click", function(e){
+            document.addEventListener("DOMContentLoaded", function() {
+                // Inicialize os componentes do Bootstrap
+                var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+                dropdownElementList.map(function (dropdownToggleEl) {
+                    return new bootstrap.Dropdown(dropdownToggleEl);
+                });
+        
+                console.log("Script carregado corretamente!"); // Log para confirmar carregamento do script
+        
+                // Adiciona o evento de clique ao botão de confirmação de entrega
+                $(".confirmar-entrega").on("click", function(e){
                     e.preventDefault();
-                    
-                    var entrega_pk = $(this).data("entrega-pk");
-                    
-                    // Verifique se entrega_pk é válido antes de fazer a solicitação AJAX
+                    console.log("Botão clicado!");
+        
+                    var entrega_pk = $(this).data("entrega-pk"); // Obtém o PK da entrega
+                    console.log("PK da Entrega:", entrega_pk);
+        
                     if (entrega_pk !== undefined) {
+                        var csrfToken = '{{ csrf_token }}';
+                        var url = "{% url 'production:status_entrega' pk=0 %}".replace("0", entrega_pk);
+                        console.log("URL gerada para a solicitação AJAX:", url);
+        
                         $.ajax({
-                            url: "{% url 'production:status_entrega' pk=0 %}".replace("0", entrega_pk),
-                            type: "POST",  // ou "GET" dependendo da sua view
-                            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                            url: url,
+                            type: "POST",
+                            data: {'csrfmiddlewaretoken': csrfToken},
                             success: function(data){
-                                // Atualize a página ou faça outras ações necessárias
-                                location.reload();
+                                alert(data.message); // Mostra a mensagem de sucesso retornada pelo servidor
+                                location.reload();   // Recarrega a página para refletir a atualização
                             },
-                            error: function(error){
-                                console.log(error);
-                                alert("Ocorreu um erro ao confirmar a entrega.");
+                            error: function(xhr, status, error){
+                                console.error("Erro na requisição AJAX:", error);
+                                console.log("Detalhes do erro:", xhr.responseText);
+                                alert("Ocorreu um erro ao confirmar a entrega. Por favor, tente novamente.");
                             }
                         });
                     } else {
                         console.error("Valor de entrega_pk é undefined. Verifique o botão e o atributo data-entrega-pk.");
                     }
                 });
+        
+                // Configuração do gráfico combinado
+                var ctx = document.getElementById('combinedChart').getContext('2d');
+                var total = {{ values|safe }}.reduce((a, b) => a + b, 0);
+                var combinedChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: {{ labels|safe }},
+                        datasets: [{
+                            data: {{ values|safe }},
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40',
+                                '#FF6384', '#36A2EB', '#FFCE56', '#36a873', '#9966FF', '#FF9F40'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            datalabels: {
+                                formatter: (value, context) => {
+                                    let percentage = (value / total * 100).toFixed(2) + "%";
+                                    return percentage;
+                                },
+                                color: '#fff',
+                                labels: {
+                                    title: {
+                                        font: {
+                                            weight: 'bold'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+        
+                // Configuração do gráfico de linha
+                console.log("Line Chart Data:", {{ line_chart_data|safe }});
+        
+                const lineChartData = JSON.parse('{{ line_chart_data|escapejs }}');
+                const datasets = [];
+        
+                for (const [fruit, data] of Object.entries(lineChartData)) {
+                    const dates = Object.keys(data);
+                    const quantities = Object.values(data);
+        
+                    datasets.push({
+                        label: fruit,
+                        data: dates.map((date, index) => ({ x: date, y: quantities[index] })),
+                        fill: false,
+                        borderColor: getRandomColor(),
+                        tension: 0.1
+                    });
+                }
+        
+                const ctxLine = document.getElementById('lineChart').getContext('2d');
+                new Chart(ctxLine, {
+                    type: 'line',
+                    data: {
+                        datasets: datasets
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+        
+                function getRandomColor() {
+                    const letters = '0123456789ABCDEF';
+                    let color = '#';
+                    for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
             });
-        </script>
+        </script> 
     </body>
 </html>

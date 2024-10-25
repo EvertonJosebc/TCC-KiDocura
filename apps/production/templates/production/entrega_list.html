@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container-fluid list-user">
         <h1>Lista de Entregas</h1>
-        <table>
+        <table class="table">
             <tr>
                 <th>Quantidade (KG) </th>
                 <th>Cliente</th>
@@ -20,14 +20,16 @@
                         <span>{{entrega.cliente}}</span>
                     </td>
                     <td>
-                        <span>{{entrega.data_producao}}</span>
+                        <span>{{entrega.data_producao|date:"d/m/Y H:i"}}</span>
                     </td>
                     <td>
-                        {%if entrega.status == False%}
-                            <a class="btn btn-warning" id="confirmar-entrega" href="#" data-entrega-pk="{{ entrega.pk }}"><strong><i class="fa-solid fa-route"></i></strong></a>
-                        {%else%}
+                        {% if entrega.status == False %}
+                            <a class="btn btn-warning confirmar-entrega" href="#" data-entrega-pk="{{ entrega.pk }}">
+                                <strong><i class="fa-solid fa-route"></i></strong>
+                            </a>
+                        {% else %}
                             <button type="button" class="btn btn-success" disabled><i class="fa-solid fa-circle-check"></i></button>
-                        {%endif%}
+                        {% endif %}
                     </td>
                 </tr>
             {%endfor%}

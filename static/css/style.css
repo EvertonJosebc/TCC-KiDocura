@@ -19,7 +19,7 @@ body, html{
     width: 15%;
     min-width: 100px !important;
     height: 100%;
-    background: linear-gradient(to right, #A19506, #FFC806);
+    background-color: #A19506;
     color: #ffffff !important;
   }
   
@@ -64,50 +64,49 @@ body, html{
 ############################################################# */
 
 #navbar{
-  padding: 15px 0;
+  padding: 10px 5px;
+  margin-bottom: 10px;
   top: 0;
-  height: 100px;
-  background: linear-gradient(to left, #A19506, #FFC806);
   margin-left: 15% !important;
-  width: 85%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-#navbar ul{
-  width: 100%;
-  align-items: center;
-}
-
-#navbar ul form{
-  width: 60%;
-  display: inline-flex;
-  margin: 0px 5%;
-  height: 40px;
-}
-
-#navbar ul form button{
-  background-color: #9ea42a;
-  color: #ffffff;
-
-}
-
-#navbar ul li{
-  margin: 0px 5%;
-}
-#navbar ul li a {
-  text-decoration: none !important;
-}
-#navbar ul li .dropdown-menu #logout strong{
-  text-decoration: none !important;
+  width: 85% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
   color: #A19506;
-  margin: 10%;
+  text-align: center;
+}
+#navbar #estoque{
+  margin-left: 20px;
+}
+#navbar #estoque_fruta{
+  display: flex;
+  width: 30%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #A19506 !important;
+  margin: auto;
+  align-items: center;
+  justify-content:space-around !important;
+  color: #ffffff !important;
+  -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.5);
+  -moz-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.5);
+}
+#navbar #estoque_fruta img{
+  width: 35%;
 }
 
-#navbar ul li a img{
-  width: 40px;
+#navbar #estoque_fruta .nav-pills{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  
 }
+
+#navbar #estoque_fruta .nav-pills .nav-item{
+  margin: 3px !important;
+}
+
 /*#############################################################
 ########################  Tela login  #########################
 ############################################################# */
@@ -158,8 +157,8 @@ body, html{
 ############################################################# */
 
 .form-register{
-  margin-left: 15% !important;
-  width: 85% !important;
+  margin-left: 20% !important;
+  width: 75% !important;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -167,19 +166,24 @@ body, html{
 #form-register{
   width: 100%;
   margin: 5px auto !important;
-  padding: 30px !important;
+  padding: 0px !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding-bottom: 5px !important;
 }
 
 #form-register h1{
   text-align: center;
-  padding-bottom: 20px;
+  padding: 15px;
   width: 100%;
+  background-color: #A19506;
+  border-radius: 10px 10px 0px 0px;
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
 #form-register button{
@@ -205,7 +209,10 @@ body, html{
   min-width: 300px;
   flex-grow: 1 !important;
   flex-basis: 300px !important;
-  
+}
+
+.requiredField span{
+  opacity: 0;
 }
 
 #form-register .form-group div select{
@@ -254,21 +261,29 @@ body, html{
   margin-top: 20px !important;
   width: 75% !important;
   margin: auto;
-  padding: 50px !important;
+  padding: 0px !important;
+  padding-bottom: 5px !important;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .list-user h1{
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  background-color: #A19506;
+  border-radius: 10px 10px 0px 0px;
+  padding: 15px;
+  color: #ffffff;
 }
 
 .list-user table{
   width: 90% !important;
-  justify-content: center;
+  margin-left: 5% !important;
+  padding-bottom: 5px !important;
 }
 
 .list-user table tr{
@@ -286,17 +301,33 @@ body, html{
 }
 
 .list-user table tr td span a{
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   background-color: #9ea42a;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
   margin: 5px 0px 5px 10px;
-  border-radius: 25%;
+  border-radius: 10%;
   text-decoration: none;
   padding: 5px;
+}
+
+.formselecao{
+  width: 55%;
+  display: flex;
+}
+
+.formselecao button{
+  background-color: #9ea42a;
+  margin-left: 5px;
+  border: none;
+}
+
+.formselecao .form-select option{
+  padding: 5px;
+  border-radius: 5px;
 }
 
 /*#############################################################
@@ -313,8 +344,8 @@ body, html{
 
 .dashboard .container {
   background-color: rgba(250, 250, 250, 0.2) !important;
-  border-radius: 12px !important;
-  padding: 15px !important;  
+  border-radius: 5px !important;
+  padding: 1px !important;  
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125)) !important;
   display: flex !important;
   flex-direction: column !important;
@@ -322,23 +353,25 @@ body, html{
   justify-content:center !important;
   text-align: center !important;
   flex-grow: 2 !important;
-  flex-basis: 300px !important;
-  max-width: 400px !important;
-  margin: 20px 25px 0 25px !important;
-  -webkit-box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
-  -moz-box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
-  box-shadow: 0px 0px 15px 0px rgba(161,149,6,1);
+  flex-basis: 33% !important;
+  height: 130px;
+  max-width: 350px !important;
+  margin: 5px !important;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(161,149,6,1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(161,149,6,1);
+  box-shadow: 0px 0px 5px 0px rgba(161,149,6,1);
 }
 
 .dashboard .container .wrapper {
-  width: 90% auto !important;
+  width: 100% auto !important;
   height: 100% !important; 
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
-  background-color: rgba(161, 149, 6, 0.5) !important;
-  border-radius: 20px !important;
+  background-color: #A19506 !important;
+  border-radius: 5px !important;
+  border: none;
 }
 
 .dashboard .container .wrapper h3{
@@ -346,6 +379,7 @@ body, html{
   display: flex !important;
   padding: 5px !important;
   align-items: center !important;
+  width: 50%;
 }
 
 .dashboard .container .wrapper .button-wrapper .btn {

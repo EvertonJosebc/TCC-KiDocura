@@ -22,7 +22,8 @@ from .form import RegisterForm
 class Home(LoginRequiredMixin,TemplateView):
     template_name = "users/dashboard.html"
     
-class Register(LoginRequiredMixin, View):
+class Register(GroupRequiredMixin, LoginRequiredMixin, View):
+    group_required = u'gerente'
     form_class = RegisterForm
     initial = {"key": "value"}
     template_name = "users/register.html"
@@ -80,12 +81,14 @@ class LogoutView(LoginRequiredMixin, View):
         logout(request)
         return redirect("login")
     
-class AdminUsers(LoginRequiredMixin, ListView):
+class AdminUsers(GroupRequiredMixin, LoginRequiredMixin, ListView):
+    group_required = u'gerente'
     model = User
     context_object_name = 'user_list'
     paginate_by = 10
 
-class UsersUpdate(LoginRequiredMixin, UpdateView):
+class UsersUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    group_required = u'gerente'
     model = User
     fields = ['username', 'email', 'rua', 'bairro', 'cidade', 'CEP', 'telefone']
     template_name = 'users/user_update.html'
@@ -114,7 +117,8 @@ def updatetipoUsuario(request,id):
         return redirect('/users/users/')
         
         
-class UserDetail(LoginRequiredMixin, DetailView):
+class UserDetail(GroupRequiredMixin, LoginRequiredMixin, DetailView):
+    group_required = u'gerente'
     model = User
     def client_detail_view(request, pk):
         user = get_object_or_404(User, pk=pk)
