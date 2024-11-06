@@ -17,6 +17,12 @@ class FrutaForm(ModelForm):
             "preco",
             "condicao",
         ]
+        
+    def clean_nome(self):
+        Nome = self.cleaned_data.get("nome")
+        if Fruta.objects.filter(nome=Nome).exists():
+            raise ValidationError("Esta fruta já está cadastrado!")
+        return Nome
 
 class CompraForm(ModelForm):
     def __init__(self, *args, **kwargs):

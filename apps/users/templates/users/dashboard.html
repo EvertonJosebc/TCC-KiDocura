@@ -28,7 +28,7 @@
                 </div>
             </div>
         {%endif%}
-        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' %}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' or user.tipoUsuario == 'gerdeproducao' %}
             <div class="container">
                 <div class="wrapper" style="background-image: url('{% static 'img/agricultor.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                     <div class="banner-image"></div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         {%endif%}
-        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' %}
+        {%if user.tipoUsuario == 'gerente' or user.tipoUsuario == 'tecdealimentos' or user.tipoUsuario == 'gerdeproducao' or user.tipoUsuario == 'auxdeproducao' %}
             <div class="container">
                 <div class="wrapper" style="background-image: url('{% static 'img/balancas.png'%}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
                     <div class="banner-image"></div>
