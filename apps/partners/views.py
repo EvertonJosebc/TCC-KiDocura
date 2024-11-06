@@ -61,7 +61,7 @@ class ClienteDetail(GroupRequiredMixin, DetailView):
         return context
     
 class ProdutorView(GroupRequiredMixin, CreateView):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
     model = Produtor
     form_class = ProdutorForm
     template_name = 'partners/produtor_register.html'
@@ -73,20 +73,20 @@ class ProdutorView(GroupRequiredMixin, CreateView):
         return super(ProdutorView,self).form_valid(form)
     
 class ProdutorList(GroupRequiredMixin, ListView):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
     model = Produtor
     queryset = Produtor.objects.all()
     template_name = 'partners/produtor_list.html'
     
 class ProdutorUpdate(GroupRequiredMixin, UpdateView):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
     model = Produtor
     fields = ['nome', 'rua', 'bairro', 'cidade', 'CEP', 'telefone', 'email']
     template_name = 'partners/produtor_update.html'
     success_url = reverse_lazy("dashboard")
     
 class ProdutorDetail(GroupRequiredMixin, DetailView):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao']
     model = Produtor
     context_object_name = 'produtor'
     template_name = 'partners/produtor_detail.html'

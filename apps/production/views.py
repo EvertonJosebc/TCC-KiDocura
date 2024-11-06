@@ -41,7 +41,7 @@ class FrutaUpdate(GroupRequiredMixin, UpdateView):
     success_url = reverse_lazy("dashboard")
     
 class CompraView(GroupRequiredMixin, View):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao', u'auxdeproducao']
     form_class = CompraForm
     initial = {'key': 'value'}
     template_name = 'production/compra_register.html'
@@ -61,7 +61,7 @@ class CompraView(GroupRequiredMixin, View):
         return render(request, self.template_name, {'form': form})
    
 class CompraList(GroupRequiredMixin, ListView):
-    group_required = [u'gerente', u'tecdealimentos']
+    group_required = [u'gerente', u'tecdealimentos', u'gerdeproducao', u'auxdeproducao']
     model = Compra
     queryset = Compra.objects.all()
     template_name = 'production/compra_list.html'
@@ -86,7 +86,7 @@ def global_context(request):
 
     
 class ProducaoView(GroupRequiredMixin, View):
-    group_required = [u'gerente', u'gerdeproducao']
+    group_required = [u'gerente', u'gerdeproducao', u'auxdeproducao']
     form_class = ProducaoForm
     initial = {'key': 'value'}
     template_name = 'production/producao_register.html'
@@ -106,7 +106,7 @@ class ProducaoView(GroupRequiredMixin, View):
         return render(request, self.template_name, {'form': form})
     
 class ProducaoList(GroupRequiredMixin, ListView):
-    group_required = [u'gerente', u'gerdeproducao']
+    group_required = [u'gerente', u'gerdeproducao', u'auxdeproducao']
     model = Producao
     queryset = Producao.objects.all()
     template_name = 'production/producao_list.html'

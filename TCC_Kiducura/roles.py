@@ -10,7 +10,7 @@ class Tecdealimentos(AbstractUserRole):
     available_permissions = {'fruta_register': True, 'list_fruta': True, 'update_fruta': True, 'compra_register': True, 'list_compra' : True , 'list_estoque': True, 'produtor_register': True, 'produtor_list':True, 'update_produtor':True, 'detail_produtor': True}
     
 class Gerdeproducao(AbstractUserRole):
-    available_permissions = {'producao_register': True, 'list_producao': True, 'list_estoque_polpa':True, 'list_estoque':True}
+    available_permissions = {'producao_register': True, 'list_producao': True, 'list_estoque_polpa':True, 'list_estoque':True, 'compra_register': True, 'list_compra' : True , 'produtor_register': True, 'produtor_list':True, 'update_produtor':True, 'detail_produtor': True}
     
 class Auxdeproducao(AbstractUserRole):
-    available_permissions = {'producao_register': True, 'list_producao': True, 'list_estoque_polpa':True, 'list_estoque':True}
+    available_permissions = {'producao_register': True, 'list_producao': True, 'list_estoque_polpa':True, 'list_estoque':True, 'compra_register': True, 'list_compra' : True}
